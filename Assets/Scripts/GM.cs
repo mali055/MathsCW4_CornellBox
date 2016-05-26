@@ -32,8 +32,12 @@ namespace Meshadieme
         
         public bool readyScene = false;
         public GameObject[] buttonRefs;
-        public GameObject[] objRefs;
         public string[] shaderNames;
+
+
+        GameObject[] objRefs;
+
+        
         public Material[] materials;
 
         /// <summary>
@@ -54,6 +58,8 @@ namespace Meshadieme
         {
             Debug.Log("GM_Awake()");
             gameManager = GetComponent<GM>() as GM;
+
+            objRefs = GameObject.FindGameObjectsWithTag("ChangingShader");
 
             //Fill Drop downs
             //Shaders
@@ -85,7 +91,11 @@ namespace Meshadieme
                     int val = buttonRefs[0].GetComponent<Dropdown>().value;
                     for (int i = 0; i < objRefs.Length; i++)
                     {
-                        objRefs[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
+                        //if(i + (val * objRefs.Length) < materials.Length)
+                        //    objRefs[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
+
+                        objRefs[i].GetComponent<ObjectController>().SetMaterial(val);
+
                         objRefs[i].SetActive(false);
                         objRefs[i].SetActive(true);
                     }
