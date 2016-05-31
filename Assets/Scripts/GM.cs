@@ -33,9 +33,11 @@ namespace Meshadieme
         public bool readyScene = false;
         public GameObject[] buttonRefs;
         public string[] shaderNames;
+        public int alexShaders;
 
 
         GameObject[] objRefs;
+        public GameObject[] objRefs2;
 
         
         public Material[] materials;
@@ -89,15 +91,31 @@ namespace Meshadieme
                     break;
                 case 1: //Apply Shader
                     int val = buttonRefs[0].GetComponent<Dropdown>().value;
-                    for (int i = 0; i < objRefs.Length; i++)
+                    if (val < alexShaders)
                     {
-                        //if(i + (val * objRefs.Length) < materials.Length)
-                        //    objRefs[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
 
-                        objRefs[i].GetComponent<ObjectController>().SetMaterial(val);
-
-                        objRefs[i].SetActive(false);
-                        objRefs[i].SetActive(true);
+                        for (int i = 0; i < objRefs2.Length; i++)
+                        {
+                            objRefs2[i].SetActive(false);
+                        }
+                        objRefs[0].GetComponent<ObjectController>().SetMaterial(val);
+                        objRefs[0].SetActive(false);
+                        objRefs[0].SetActive(true);
+                        objRefs[1].SetActive(true);
+                        objRefs[2].SetActive(true);
+                    } else
+                    {
+                        objRefs[0].SetActive(false);
+                        objRefs[1].SetActive(false);
+                        objRefs[2].SetActive(false);
+                        for (int i = 0; i < objRefs2.Length; i++)
+                        {
+                            if (i + ((val-alexShaders) * objRefs2.Length) < materials.Length) { 
+                                objRefs2[i].GetComponent<Renderer>().material = materials[i + ((val - alexShaders) * objRefs2.Length)];
+                                objRefs2[i].SetActive(false);
+                                objRefs2[i].SetActive(true);
+                            }
+                        }
                     }
                     break;
                 case 2: //Drop Light
