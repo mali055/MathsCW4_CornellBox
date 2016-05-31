@@ -98,18 +98,20 @@ namespace Meshadieme
                         {
                             objRefs2[i].SetActive(false);
                         }
-                        for (int i = 0; i < objRefs.Length; i++)
-                        {
-                            objRefs[i].GetComponent<ObjectController>().SetMaterial(val);
-                            objRefs[i].SetActive(false);
-                            objRefs[i].SetActive(true);
-                        }
+                        objRefs[0].GetComponent<ObjectController>().SetMaterial(val);
+                        objRefs[0].SetActive(false);
+                        objRefs[0].SetActive(true);
+                        objRefs[1].SetActive(true);
+                        objRefs[2].SetActive(true);
                     } else
                     {
+                        objRefs[0].SetActive(false);
+                        objRefs[1].SetActive(false);
+                        objRefs[2].SetActive(false);
                         for (int i = 0; i < objRefs2.Length; i++)
                         {
-                            if (i + (val * objRefs.Length) < materials.Length) { 
-                                objRefs2[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
+                            if (i + ((val-alexShaders) * objRefs2.Length) < materials.Length) { 
+                                objRefs2[i].GetComponent<Renderer>().material = materials[i + ((val - alexShaders) * objRefs2.Length)];
                                 objRefs2[i].SetActive(false);
                                 objRefs2[i].SetActive(true);
                             }
