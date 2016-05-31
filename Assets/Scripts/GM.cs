@@ -93,18 +93,23 @@ namespace Meshadieme
                     int val = buttonRefs[0].GetComponent<Dropdown>().value;
                     if (val < alexShaders)
                     {
-
+                        Debug.Log(val);
                         for (int i = 0; i < objRefs2.Length; i++)
                         {
                             objRefs2[i].SetActive(false);
                         }
                         objRefs[0].GetComponent<ObjectController>().SetMaterial(val);
+                        objRefs[1].GetComponent<ObjectController>().SetMaterial(val);
+                        objRefs[2].GetComponent<ObjectController>().SetMaterial(val);
                         objRefs[0].SetActive(false);
+                        objRefs[1].SetActive(false);
+                        objRefs[2].SetActive(false);
                         objRefs[0].SetActive(true);
                         objRefs[1].SetActive(true);
                         objRefs[2].SetActive(true);
                     } else
                     {
+                        Debug.Log(val);
                         objRefs[0].SetActive(false);
                         objRefs[1].SetActive(false);
                         objRefs[2].SetActive(false);
