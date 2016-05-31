@@ -33,6 +33,7 @@ namespace Meshadieme
         public bool readyScene = false;
         public GameObject[] buttonRefs;
         public string[] shaderNames;
+        public int alexShaders;
 
 
         GameObject[] objRefs;
@@ -89,15 +90,30 @@ namespace Meshadieme
                     break;
                 case 1: //Apply Shader
                     int val = buttonRefs[0].GetComponent<Dropdown>().value;
-                    for (int i = 0; i < objRefs.Length; i++)
+                    if (val < alexShaders)
                     {
-                        //if(i + (val * objRefs.Length) < materials.Length)
-                        //    objRefs[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
+                        for (int i = 0; i < objRefs.Length; i++)
+                        {
+                            //if(i + (val * objRefs.Length) < materials.Length)
+                            //    objRefs[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
 
-                        objRefs[i].GetComponent<ObjectController>().SetMaterial(val);
+                            objRefs[i].GetComponent<ObjectController>().SetMaterial(val);
 
-                        objRefs[i].SetActive(false);
-                        objRefs[i].SetActive(true);
+                            objRefs[i].SetActive(false);
+                            objRefs[i].SetActive(true);
+                        }
+                    } else
+                    {
+
+                        for (int i = 0; i < objRefs.Length; i++)
+                        {
+
+                            if (i + (val * objRefs.Length) < materials.Length) { 
+                                objRefs[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
+                                objRefs[i].SetActive(false);
+                                objRefs[i].SetActive(true);
+                            }
+                        }
                     }
                     break;
                 case 2: //Drop Light
