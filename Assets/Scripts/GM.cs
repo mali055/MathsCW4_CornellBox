@@ -37,6 +37,7 @@ namespace Meshadieme
 
 
         GameObject[] objRefs;
+        public GameObject[] objRefs2;
 
         
         public Material[] materials;
@@ -92,26 +93,25 @@ namespace Meshadieme
                     int val = buttonRefs[0].GetComponent<Dropdown>().value;
                     if (val < alexShaders)
                     {
+
+                        for (int i = 0; i < objRefs2.Length; i++)
+                        {
+                            objRefs2[i].SetActive(false);
+                        }
                         for (int i = 0; i < objRefs.Length; i++)
                         {
-                            //if(i + (val * objRefs.Length) < materials.Length)
-                            //    objRefs[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
-
                             objRefs[i].GetComponent<ObjectController>().SetMaterial(val);
-
                             objRefs[i].SetActive(false);
                             objRefs[i].SetActive(true);
                         }
                     } else
                     {
-
-                        for (int i = 0; i < objRefs.Length; i++)
+                        for (int i = 0; i < objRefs2.Length; i++)
                         {
-
                             if (i + (val * objRefs.Length) < materials.Length) { 
-                                objRefs[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
-                                objRefs[i].SetActive(false);
-                                objRefs[i].SetActive(true);
+                                objRefs2[i].GetComponent<Renderer>().material = materials[i + (val * objRefs.Length)];
+                                objRefs2[i].SetActive(false);
+                                objRefs2[i].SetActive(true);
                             }
                         }
                     }
